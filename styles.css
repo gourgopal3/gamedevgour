@@ -1,0 +1,934 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    color: #ffffff;
+    background-color: #111010;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    scroll-behavior: smooth; /* Smooth scrolling */
+}
+
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 100px 0;
+    text-align: center;
+    position: relative; /* For header animation */
+    animation: fadeInDown 1s ease-out; /* Animation on load */
+    height: fit-content;
+    
+   
+}
+
+
+.slideshow-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 1s ease-in-out; /* Smooth transition effect */
+    opacity: 0.01; /* Adjust opacity for the background image */
+    z-index: 1; /* Place behind other content */
+}
+
+
+
+/* Black overlay to darken the background */
+.black-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Black color with 50% opacity */
+    z-index: 2; /* Place above the slideshow background, but below content */
+}
+
+
+.container-header-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: white; /* Adjust text color for visibility */
+    text-align: center;
+    position: relative; /* Ensure content stays above the background */
+    z-index: 3; /* Ensure content is above the overlay */
+}
+
+/*na cssss...............*/
+
+
+
+.navbar {
+    background-color: #333;
+    padding: 15px 0;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Navbar shadow for depth */
+    animation: navbarEntrance 1s ease-out forwards; /* Navbar entrance animation */
+    position: sticky; /* change the value sticky to show the nav bar alwqays*/
+    z-index: 1000; /* Keep nav on top */
+    top: 0;
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Allows items to wrap to the next line */
+}
+
+.nav-item {
+    margin: 0 15px;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: navItemFadeIn 0.8s ease-out forwards;
+    animation-delay: calc(0.3s + var(--i) * 0.2s); /* Delays each item */
+}
+
+.nav-item a {
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 18px;
+    padding: 10px 20px;
+    transition: all 0.4s ease;
+    position: relative;
+    display: inline-block;
+    overflow: hidden; /* Ensure child elements are clipped */
+}
+
+.nav-item a:hover {
+    color: #ff7b00;
+    background-color: #444;
+    text-shadow: 0 0 8px rgba(255, 99, 71, 0.8), 
+                0 0 16px rgba(255, 99, 71, 0.6), 
+                0 0 24px rgba(255, 99, 71, 0.4); /* Glowing text effect */
+    box-shadow: 0 0 10px rgba(255, 99, 71, 0.6), 
+                0 0 20px rgba(255, 99, 71, 0.4); /* Glowing background effect */
+    transform: scale(1.1); /* Scale up on hover */
+}
+
+.nav-item a::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #ff6347;
+    bottom: 0;
+    left: 50%;
+    transition: all 0.3s ease;
+}
+
+.nav-item a:hover::before {
+    width: 100%;
+    left: 0;
+}
+
+.nav-item a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 100%;
+    background-color: rgba(255, 99, 71, 0.2);
+    top: 0;
+    left: 50%;
+    transition: all 0.3s ease;
+    z-index: -1;
+}
+
+.nav-item a:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+
+
+
+/* Keyframes for animations */
+
+@keyframes navbarEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes navItemFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+
+
+
+/*na cssss...............*/
+
+section {
+    padding: 60px 0;
+    opacity: 0;
+    transform: translateY(50px); /* Start off-screen */
+    transition: all 0.6s ease-out; /* Smooth transition for fade-in */
+}
+
+h2 {
+    font-size: 4em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+
+
+
+    width: 1000px;
+    height: 200px;
+    background: linear-gradient(135deg, #282828, #3a3a3a); /* Diagonal gradient background */
+    border-radius: 20px; /* Rounded corners */
+    text-align: center;
+    color: white;
+    padding: 20px;
+    position: relative; /* For positioning child elements */
+    overflow: hidden; /* Hide overflowing child elements */
+    box-shadow: 
+        0 0 15px rgba(255, 0, 0, 0.8),
+        0 0 25px rgba(137, 0, 228, 0.7),
+        0 0 35px rgb(0, 252, 231),
+        0 0 45px rgba(0, 255, 0, 0.5);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin: 20px; /* Adds spacing around the div */
+
+    
+}
+
+.project-card {
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation for hover */
+}
+
+.project-card:hover {
+    transform: translateY(-10px); /* Lift effect */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Deeper shadow */
+}
+
+.project-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+    animation: fadeInUp 1s ease-out; /* Form animation */
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: border-color 0.3s ease; /* Smooth border transition */
+}
+
+form input:focus, form textarea:focus {
+    border-color: #333; /* Focus effect */
+}
+
+form button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Button animations */
+}
+
+form button:hover {
+    background-color: #555;
+    transform: scale(1.05); /* Button hover effect */
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Keyframes for Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Additional CSS for Project Categories */
+
+
+
+
+/* Social Media Icon Styles */
+.social-media {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.social-media a {
+    color: #020202;
+    margin: 0 15px;
+    font-size: 1.5em;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-media a:hover {
+    color: #0077b5; /* Example: LinkedIn color */
+    transform: scale(1.2);
+}
+
+/* Individual Icon Colors */
+.social-media a:nth-child(1):hover { color: #0077b5; } /* LinkedIn color */
+.social-media a:nth-child(2):hover { color: #333; }    /* GitHub color */
+.social-media a:nth-child(3):hover { color: #E1306C; } /* Instagram color */
+.social-media a:nth-child(4):hover { color: #1DA1F2; } /* Twitter color */
+
+
+
+
+
+
+/* Social Media head Icon Styles */
+.social-media-head {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.social-media-head a {
+    color: #ffffff;
+    margin: 0 15px;
+    font-size: 1.5em;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-media-head a:hover {
+    color: #0077b5; /* Example: LinkedIn color */
+    transform: scale(1.2);
+}
+
+/* Individual Icon Colors */
+.social-media-head a:nth-child(1):hover { color: #0077b5; } /* LinkedIn color */
+.social-media-head a:nth-child(2):hover { color: #333; }    /* GitHub color */
+.social-media-head a:nth-child(3):hover { color: #E1306C; } /* Instagram color */
+.social-media-head a:nth-child(4):hover { color: #1DA1F2; } /* Twitter color */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Glowing Circular Container */
+.glowing-circle {
+    width: 150px; /* Size of the circular container */
+    height: 150px; /* Size of the circular container */
+    border-radius: 50%; /* Makes the container circular */
+    background-color: #282828; /* Background color of the container */
+    overflow: hidden; /* Hide overflow to keep image inside the circle */
+    box-shadow: 
+        0 0 10px rgba(255, 0, 0, 0.8),   /* Red outer glow */
+        0 0 20px rgba(228, 91, 0, 0.7), /* Purple middle glow */
+        0 0 30px rgba(0, 0, 255, 0.6),   /* Blue inner glow */
+        0 0 40px rgba(0, 255, 0, 0.5);   /* Green innermost glow */
+    display: flex; /* Center content inside */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    transition: box-shadow 0.3s ease-in-out; /* Smooth transition on hover */
+}
+
+/* Circular Image */
+.circle-image {
+    width: 100%; /* Make the image fit the container */
+    height: 100%; /* Make the image fit the container */
+    object-fit: cover; /* Cover the container while maintaining aspect ratio */
+    border-radius: 50%; /* Make the image circular */
+}
+
+/* Optional Hover Effect for Enhanced Multi-Color Glow */
+.glowing-circle:hover {
+    box-shadow: 
+        0 0 15px rgba(255, 0, 0, 1),   /* Enhanced red outer glow */
+        0 0 25px rgba(137, 0, 228, 1), /* Enhanced purple middle glow */
+        0 0 35px rgba(0, 0, 255, 0.8), /* Enhanced blue inner glow */
+        0 0 45px rgba(0, 255, 0, 0.7); /* Enhanced green innermost glow */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Glowing Text */
+.glowing-text {
+    font-size: 18px; /* Adjust font size as needed */
+    color: #fff; /* Text color */
+    text-align: center; /* Center text */
+    text-shadow: 
+        0 0 10px rgba(255, 0, 0, 0.8),   /* Red outer glow */
+        0 0 20px rgba(137, 0, 228, 0.7), /* Purple middle glow */
+        0 0 30px rgba(0, 0, 255, 0.6),   /* Blue inner glow */
+        0 0 40px rgba(0, 255, 0, 0.5);   /* Green innermost glow */
+    transition: text-shadow 0.3s ease-in-out; /* Smooth transition on hover */
+}
+
+/* Optional Hover Effect for Enhanced Multi-Color Glow */
+.glowing-text:hover {
+    text-shadow: 
+        0 0 15px rgba(255, 0, 0, 1),   /* Enhanced red outer glow */
+        0 0 25px rgba(137, 0, 228, 1), /* Enhanced purple middle glow */
+        0 0 35px rgba(0, 0, 255, 0.8), /* Enhanced blue inner glow */
+        0 0 45px rgba(0, 255, 0, 0.7); /* Enhanced green innermost glow */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Enhanced Glowing Border Div */
+.stylized-div {
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(135deg, #ff0000, #09ff00,#0000ff); /* Diagonal gradient background */
+    border-radius: 20px; /* Rounded corners */
+    text-align: center;
+    color: white;
+    padding: 20px;
+    position: relative; /* For positioning child elements */
+    overflow: hidden; /* Hide overflowing child elements */
+    box-shadow: 
+        0 0 15px rgba(255, 0, 0, 0.8),
+        0 0 25px rgba(137, 0, 228, 0.7),
+        0 0 35px rgb(0, 252, 231),
+        0 0 45px rgba(0, 255, 0, 0.5);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin: 20px; /* Adds spacing around the div */
+}
+
+/* Hover Effect for Glowing and Scaling */
+.stylized-div:hover {
+    transform: scale(1.05); /* Slightly increase size on hover */
+    box-shadow: 
+        0 0 20px rgba(255, 0, 0, 1),
+        0 0 30px rgba(137, 0, 228, 1),
+        0 0 40px rgb(0, 255, 213),
+        0 0 50px rgba(0, 255, 0, 0.7);
+}
+
+/* Adding a Pattern or Overlay Effect */
+.stylized-div::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 10%, transparent 10%);
+    background-size: 10px 10px;
+    z-index: 1; /* Keep the overlay below the content */
+    pointer-events: none; /* Allow clicking through the overlay */
+}
+
+/* Text with a Subtle Glow */
+.stylized-div h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    z-index: 2; /* Keep text above overlay */
+    position: relative;
+    text-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.7),
+        0 0 20px rgba(255, 255, 255, 0.5);
+}
+
+/* Content inside the div */
+.stylized-div p {
+    z-index: 2;
+    position: relative;
+    line-height: 1.5;
+}
+
+/* Animated Border */
+.stylized-div::after {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    background: linear-gradient(45deg, #ff0000, #8900e4, #0000ff, #00ff00);
+    background-size: 400% 400%;
+    z-index: 0; /* Behind the content */
+    border-radius: 25px; /* Matches the corner radius */
+    animation: gradientAnimation 5s ease infinite; /* Animate the gradient */
+}
+
+/* Gradient Animation */
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.card-section {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 20px;
+    justify-content: center;
+}
+
+.card-category {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.category-title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 16px;
+    color: #333;
+}
+
+/* Card styling with animated gradient background */
+.card {
+    background: linear-gradient(135deg, #ffae00, #9b9b9b,#ffae00);
+    background-size: 400% 400%;
+    animation: gradientAnimation 5s ease infinite;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s, height 0.3s;
+    min-height: 180px;
+    color: white;
+}
+
+/* Hover effects */
+.card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Add an overlay on hover */
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.card:hover::before {
+    opacity: 1;
+}
+
+/* Text animations */
+.card h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 22px;
+    animation: fadeInUp 0.5s ease-in-out;
+}
+
+.card p {
+    margin: 0;
+    animation: fadeInUp 0.7s ease-in-out;
+}
+
+/* Keyframe animations */
+@keyframes fadeInUp {
+    from {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Animated gradient keyframes */
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Border animation */
+.card {
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+.card:hover {
+    border-color: white;
+}
+
+/* Icon or custom font integration */
+.card h3::before {
+    content: '⭐'; /* Example of adding an icon before the title */
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card {
+        min-height: 220px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Stylize the <hr> element with a glowing effect */
+hr {
+    border: none; /* Remove default border */
+    height: 2px; /* Set the thickness of the line */
+    background: linear-gradient(90deg, #ff7e5f, #feb47b); /* Add gradient background */
+    margin: 20px 0; /* Add spacing around the hr */
+    border-radius: 4px; /* Slight rounding for smoother look */
+    width: 80%; /* Set width to be less than full width for a centered line */
+    margin-left: auto; /* Center the hr */
+    margin-right: auto; /* Center the hr */
+    position: relative; /* Position relative for the pseudo-element */
+    animation: glowing 2s infinite; /* Apply glowing animation */
+}
+
+/* Glowing animation for <hr> */
+@keyframes glowing {
+    0% {
+        box-shadow: 0 0 5px #ff7e5f, 0 0 10px #ff7e5f, 0 0 15px #ff7e5f, 0 0 20px #feb47b, 0 0 25px #feb47b;
+    }
+    50% {
+        box-shadow: 0 0 10px #feb47b, 0 0 20px #feb47b, 0 0 30px #feb47b, 0 0 40px #ff7e5f, 0 0 50px #ff7e5f;
+    }
+    100% {
+        box-shadow: 0 0 5px #ff7e5f, 0 0 10px #ff7e5f, 0 0 15px #ff7e5f, 0 0 20px #feb47b, 0 0 25px #feb47b;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.card-section3 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.card3 {
+    display: flex;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    max-width: 600px;
+}
+
+.card3:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border: 2px solid #00aeff; /* Glowing border effect */
+    
+}
+
+.card-image3 {
+    width: 40%;
+    min-height: 150px;
+    background-color: #ddd;
+    background-size: cover;
+    background-position: center;
+    transition: all 0.3s ease;
+}
+
+.card3:hover .card-image3 {
+    filter: brightness(1.2);
+}
+
+.card-content3 {
+    padding: 20px;
+    width: 60%;
+    background: linear-gradient(45deg, #ffe600, #00b7ff,#ffe600);
+    background-size: 300% 300%;
+    animation: gradientAnimation3 2s ease infinite; /* Animation properties */
+    color: white;
+    border-radius: 0 10px 10px 0;
+}
+
+.card-content3 h2 {
+    margin-bottom: 10px;
+}
+
+.card-content3 p {
+    line-height: 1.5;
+}
+
+@keyframes gradientAnimation3 {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .card3 {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card-image3,
+    .card-content3 {
+        width: 100%;
+    }
+
+    .card-content3 {
+        border-radius: 0 0 10px 10px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Go to Top Button styling */
+#goTopBtn {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    display: none; /* Initially hidden */
+    background-color: #00f7ff; /* Button background color */
+    color: white; /* Button text color */
+    border: none;
+    padding: 15px 20px;
+    border-radius: 45px;
+    cursor: pointer;
+    box-shadow: 0 14px 18px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 0; /* Initially transparent */
+    transform: translateY(20px); /* Initially translated down */
+    z-index: 1000;
+}
+
+/* Show button when active */
+#goTopBtn.show {
+    display: block;
+    opacity: 1; /* Fully opaque */
+    transform: translateY(0); /* Move back to position */
+}
+
+/* Hover effect for button */
+#goTopBtn:hover {
+    background-color: #225a64; /* Darker shade */
+}
